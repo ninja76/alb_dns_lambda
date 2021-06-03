@@ -9,9 +9,9 @@ from botocore.vendored import requests
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
-zoneId = os.environ(ZONE_ID, None) #Route 53 Zone ID
-iam_cross_account_arn = os.environ(IAM_CROSS_ACCOUNT_ARN, None) #Cross Account IAM role with permissions to Route53 zoneId
-s3_r53_backup_bucket = os.environ(BUCKET, None) # Bucket where to dump zone backup before making changes
+zoneId = os.getenv(ZONE_ID, None) #Route 53 Zone ID
+iam_cross_account_arn = os.getenv(IAM_CROSS_ACCOUNT_ARN, None) #Cross Account IAM role with permissions to Route53 zoneId
+s3_r53_backup_bucket = os.getenv(BUCKET, None) # Bucket where to dump zone backup before making changes
 
 sts_client = boto3.client('sts')
 watchedEvents = ['CreateLoadBalancer', 'DeleteLoadBalancer', 'AddTags', 'CreateDomainName', 'DeleteDomainName']
